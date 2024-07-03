@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Animation</title>
+  
+  <style>
+    /* styles.css */
+.animate-on-scroll {
+  transform: translateY(50px);
+  transition: all 0.5s ease-out;
+}
+
+.animate-on-scroll.visible {
+  transform: translateY(0);
+}
+
+    </style>
+
+</head>
+<body>
+  <div style="height: 100vh; background-color: lightblue;">
+    <h1>Scroll down to see the animation</h1>
+  </div>
+  <div class="animate-on-scroll">
+    <h2>This div will animate</h2>
+  </div>
+  <div style="height: 100vh; background-color: lightgreen;">
+    <h1>Keep scrolling...</h1>
+  </div>
+  
+  <script>// scripts.js
+    document.addEventListener('DOMContentLoaded', function() {
+      const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    
+      function checkScroll() {
+        const triggerBottom = window.innerHeight / 5 * 4;
+        animatedElements.forEach(element => {
+          const elementTop = element.getBoundingClientRect().top;
+    
+          if(elementTop < triggerBottom) {
+            element.classList.add('visible');
+          } else {
+            element.classList.remove('visible');
+          }
+        });
+      }
+    
+      window.addEventListener('scroll', checkScroll);
+      checkScroll(); // Initial check on page load
+    });
+    </script>
+</body>
+</html>
